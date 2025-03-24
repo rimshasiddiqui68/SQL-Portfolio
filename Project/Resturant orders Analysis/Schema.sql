@@ -33,3 +33,12 @@ CHANGE
 ALTER TABLE order_details1
 CHANGE
 `ï»¿order_details_id` order_details_id INT;
+
+-- Let's Update Date Format and it's type to Date
+UPDATE order_details1
+set order_date = str_to_date(order_date, '%m/%d/%Y');
+
+ALTER TABLE order_details1
+MODIFY COLUMN
+order_date date;
+desc order_details1;
