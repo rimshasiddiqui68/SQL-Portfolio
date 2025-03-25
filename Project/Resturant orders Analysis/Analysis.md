@@ -237,5 +237,183 @@ having Item_count > 12;
 | 1957     | 14                     |
 <br>
 
+**15. How many orders has more than 12 menu items**
+```sql
+SELECT COUNT(order_id) as order_count
+from(SELECT order_id, count(item_id) as Item_count
+FROM order_details1
+group by order_id
+having Item_count>12) as fr;
+```
+**Result Set :**
+| Order Count |
+|----------|
+| 20     |
+<br>
 
+**16.Top 5 order that spend the most money**
+```sql
+SELECT o.order_id , sum(m.price) as Total_amount
+FROM menu_items1 m
+JOIN order_details1 o on o.item_id = m.menu_item_id
+GROUP BY o.order_id
+ORDER BY Total_amount desc
+LIMIT 5;
+```
+**Result Set :**
+| Order ID | Total Amount ($) |
+|----------|------------------|
+| 440      | 192.15           |
+| 2075     | 191.05           |
+| 1957     | 190.10           |
+| 330      | 189.70           |
+| 2675     | 185.10           |
+<br>
+
+## ` Time-Based Analysis`
+
+**17.What is the trend of orders per day? (Daily order count)**
+```sql
+SELECT order_date, count(distinct order_id) as Total_order
+FROM order_details1
+GROUP BY order_date
+ORDER BY order_date;
+```
+**Result Set :** displaying only 8 first entries for better convinience
+| Order Date  | Total Orders |
+|------------|--------------|
+| 2023-01-01 | 69           |
+| 2023-01-02 | 67           |
+| 2023-01-03 | 66           |
+| 2023-01-04 | 52           |
+| 2023-01-05 | 54           |
+| 2023-01-06 | 64           |
+| 2023-01-07 | 58           |
+| 2023-01-08 | 72           |
+<br>
+
+**18.What are the peak order times? (Most frequent order hours)**
+```sql
+SELECT 
+    DATE_FORMAT(STR_TO_DATE(order_time, '%h:%i:%s %p'), '%h %p') AS order_hour, 
+    COUNT(*) AS total_orders
+FROM order_details1
+GROUP BY order_hour
+ORDER BY total_orders DESC;
+```
+**Result Set :** displaying only 8 first entries for better convinience
+| Order Hour | Total Orders |
+|------------|-------------|
+| 12 PM      | 1672        |
+| 01 PM      | 1575        |
+| 05 PM      | 1370        |
+| 06 PM      | 1307        |
+| 07 PM      | 1085        |
+| 04 PM      | 1054        |
+| 02 PM      | 968         |
+| 08 PM      | 889         |
+<br>
+
+**19.How does order volume change over time (monthly)**
+```sql
+SELECT
+   DATE_FORMAT(order_date, '%Y-%m') AS month, 
+COUNT(DISTINCT order_id) AS Total_orders
+FROM order_details1
+GROUP BY month
+order by month;
+```
+**Result Set :** 
+| Order Month | Total Orders |
+|------------|--------------|
+| 2023-01    | 1845         |
+| 2023-02    | 1685         |
+| 2023-03    | 1840         |
+<br>
+
+## `Customer Behavior & Pricing Analysis`
+
+**20.What is total revenue per category**
+```sql
+SELECT m.category , sum(m.price) AS Total_revenue
+FROM order_details1 o
+JOIN menu_items1 m ON o.item_id = m.menu_item_id
+GROUP BY m.category
+ORDER BY Total_revenue desc;
+```
+
+**Result Set :**
+| Category  | Total Revenue ($)     |
+|-----------|----------------------|
+| Italian   | 49,462.70            |
+| Asian     | 46,720.65            |
+| Mexican   | 34,796.80            |
+| American  | 28,237.75            |
+<br>
+
+**21.What is the most expensive order ever placed**
+```sql
+SELECT o.order_id,
+SUM(m.price) AS total_order_value
+FROM order_details1 o
+JOIN menu_items1 m ON o.item_id = m.menu_item_id
+GROUP BY o.order_id
+ORDER BY total_order_value desc
+LIMIT 1;
+```
+
+**Result Set :**
+| Order ID | Total Order Value ($) |
+|----------|----------------------|
+| 440      | 192.15               |
+<br>
+
+**22.Details of highest spends orders**
+```sql
+SELECT 
+    m.item_name,
+    m.category,
+    o.order_id,
+    order_summary.total_order_value,
+    order_summary.total_items
+FROM order_details1 o
+JOIN menu_items1 m ON o.item_id = m.menu_item_id
+JOIN (
+    -- Subquery to calculate total order value and total items per order
+    SELECT 
+        order_id,
+        SUM(m.price) AS total_order_value,
+        COUNT(o.item_id) AS total_items
+    FROM order_details1 o
+    JOIN menu_items1 m ON o.item_id = m.menu_item_id
+    GROUP BY order_id
+) AS order_summary ON o.order_id = order_summary.order_id
+ORDER BY order_summary.total_order_value DESC;
+```
+**Result Set :** displaying first 22 entries for better convinience 
+| Item Name              | Category  | Order ID | Total Order Value | Total Items |
+|------------------------|----------|----------|-------------------|-------------|
+| Eggplant Parmesan     | Italian  | 440      | 192.15            | 14          |
+| French Fries         | American | 440      | 192.15            | 14          |
+| Chicken Parmesan     | Italian  | 440      | 192.15            | 14          |
+| Chips & Salsa       | Mexican  | 440      | 192.15            | 14          |
+| Edamame             | Asian    | 440      | 192.15            | 14          |
+| Meat Lasagna        | Italian  | 440      | 192.15            | 14          |
+| Korean Beef Bowl    | Asian    | 440      | 192.15            | 14          |
+| Fettuccine Alfredo  | Italian  | 440      | 192.15            | 14          |
+| Fettuccine Alfredo  | Italian  | 440      | 192.15            | 14          |
+| Spaghetti & Meatballs | Italian | 440      | 192.15            | 14          |
+| Spaghetti & Meatballs | Italian | 440      | 192.15            | 14          |
+| Spaghetti           | Italian  | 440      | 192.15            | 14          |
+| Hot Dog            | American | 440      | 192.15            | 14          |
+| Steak Tacos       | Mexican  | 440      | 192.15            | 14          |
+| Eggplant Parmesan  | Italian  | 2075     | 191.05            | 13          |
+| Eggplant Parmesan  | Italian  | 2075     | 191.05            | 13          |
+| Chips & Salsa      | Mexican  | 2075     | 191.05            | 13          |
+| Steak Burrito      | Mexican  | 2075     | 191.05            | 13          |
+| Salmon Roll       | Asian    | 2075     | 191.05            | 13          |
+| California Roll   | Asian    | 2075     | 191.05            | 13          |
+| Mushroom Ravioli  | Italian  | 2075     | 191.05            | 13          |
+| Meat Lasagna      | Italian  | 2075     | 191.05            | 13          |
+<br>
 
