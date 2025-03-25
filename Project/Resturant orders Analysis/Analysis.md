@@ -417,3 +417,47 @@ ORDER BY order_summary.total_order_value DESC;
 | Meat Lasagna      | Italian  | 2075     | 191.05            | 13          |
 <br>
 
+**22.Total orders per menu item categorized by their respective menu categories:**
+```sql
+SELECT 
+    m.category, 
+    m.item_name, 
+    COUNT(o.item_id) AS total_orders
+FROM order_details1 o
+JOIN menu_items1 m ON o.item_id = m.menu_item_id
+GROUP BY m.category, m.item_name
+ORDER BY m.category, total_orders DESC;
+```
+**Result Set :**
+
+| Category  | Item Name              | Total Orders |
+|-----------|------------------------|--------------|
+| Asian     | Edamame                | 620          |
+| Asian     | Korean Beef Bowl       | 588          |
+| Asian     | Tofu Pad Thai          | 562          |
+| Asian     | Orange Chicken         | 456          |
+| Asian     | Pork Ramen             | 360          |
+| Asian     | California Roll        | 355          |
+| Asian     | Salmon Roll            | 324          |
+| Asian     | Potstickers            | 205          |
+| Italian   | Spaghetti & Meatballs  | 470          |
+| Italian   | Eggplant Parmesan      | 420          |
+| Italian   | Spaghetti              | 367          |
+| Italian   | Chicken Parmesan       | 364          |
+| Italian   | Mushroom Ravioli       | 359          |
+| Italian   | Meat Lasagna           | 273          |
+| Italian   | Fettuccine Alfredo     | 249          |
+| Italian   | Shrimp Scampi          | 239          |
+| Italian   | Cheese Lasagna         | 207          |
+| Mexican   | Steak Torta            | 489          |
+| Mexican   | Chips & Salsa          | 461          |
+| Mexican   | Chicken Burrito        | 455          |
+| Mexican   | Chicken Torta          | 379          |
+| Mexican   | Steak Burrito          | 354          |
+| Mexican   | Chips & Guacamole      | 237          |
+| Mexican   | Cheese Quesadillas     | 233          |
+| Mexican   | Steak Tacos            | 214          |
+| Mexican   | Chicken Tacos          | 123          |
+<br>
+
+
