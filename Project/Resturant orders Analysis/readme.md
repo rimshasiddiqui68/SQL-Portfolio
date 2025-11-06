@@ -1,8 +1,9 @@
 # 📊 Sql Project- Resturant Order Analysis
 
 <p align="center">
-  <img src="https://github.com/rimshasiddiqui68/SQL-Portfolio/blob/8490b548e5af8f10b1d955dce5a115a579a1fc7a/Project-ShipEase%20Logistic%20Data%20Analysis/Screenshot%202025-11-06%20192826.png?raw=true" alt="ShipEase Logistic Analysis" width="100%">
+  <img src="https://github.com/rimshasiddiqui68/SQL-Portfolio/blob/12b7cdd85819d3a0b893f7d682f777f33c136575/Project/Resturant%20orders%20Analysis/DALL%C2%B7E%202025-03-25%2003.08.35%20-%20A%20professional%20and%20modern%20cover%20image%20for%20a%20restaurant%20order%20analysis%20project.%20The%20image%20should%20feature%20a%20stylish%20restaurant%20setting%20with%20digital%20orde.webp?raw=true" alt="Restaurant Orders Analysis" width="100%">
 </p>
+
 
 
 ## About this Project
