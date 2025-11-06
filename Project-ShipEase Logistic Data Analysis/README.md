@@ -1,5 +1,9 @@
 # ShipEase Logistic Data Analysis
 
+<p align="center">
+  <img src="https://github.com/rimshasiddiqui68/SQL-Portfolio/blob/8490b548e5af8f10b1d955dce5a115a579a1fc7a/Project-ShipEase%20Logistic%20Data%20Analysis/Screenshot%202025-11-06%20192826.png?raw=true" alt="ShipEase Logistic Analysis" width="100%">
+</p>
+
 ## Introduction
 In the scope of this project, the objective is to explore and analyse the operational data of a logistics company, focusing on understanding how efficiently the company manages shipments, payments, and customer relationships. Using MySQL for querying and data exploration, this project examines key metrics such as delivery timelines, shipment costs, employee performance, and customer memberships. The goal is to uncover trends, identify process inefficiencies, and derive actionable insights to improve logistics operations and client satisfaction.
 
