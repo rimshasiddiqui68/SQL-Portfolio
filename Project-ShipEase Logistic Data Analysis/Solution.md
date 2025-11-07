@@ -115,6 +115,8 @@ Displaying only first 5 entries for convenience
 
 <br>
 
+## Analysis
+
 **8.Create a view to calculate the Total Payable Amount (Amount + Shipping Charges)**
 ```sql
 CREATE VIEW Payment_Summary AS
