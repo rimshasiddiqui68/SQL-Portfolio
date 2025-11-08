@@ -52,5 +52,10 @@ The following analytical questions were explored using MySQL to uncover insights
 24. Determine the average payment amount per mode of payment.
 
  ## Tool Used : `MySql`
- 
+
+ ## 📊 Detailed Analysis Report
+
+You can read the complete storytelling-style analysis and insights here:  
+➡️ [View Full Analysis Report](https://github.com/rimshasiddiqui68/SQL-Portfolio/blob/7f8c65b84532e7c69404ed5ac4473d69eb4231fb/Project-ShipEase%20Logistic%20Data%20Analysis/Analysis.md)
+
 
