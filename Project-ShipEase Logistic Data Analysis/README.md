@@ -23,6 +23,8 @@ The goal is to design and analyze a relational database that reflects these real
 3. **Column Renaming:** Rename columns for clarity and consistency.  
 4. **Data Typing:** Convert columns to appropriate data types for analysis.
 
+## For DC Report Check this Out ➡️ [View Quality Check Report](https://github.com/rimshasiddiqui68/SQL-Portfolio/blob/main/Project-ShipEase%20Logistic%20Data%20Analysis/Quality%20Check%20report.pdf)
+
 ## List of Analytical Questions to be solved
 The following analytical questions were explored using MySQL to uncover insights from the logistics company’s database. These queries focus on data validation, customer analysis, shipment efficiency, and overall operational performance.
 
